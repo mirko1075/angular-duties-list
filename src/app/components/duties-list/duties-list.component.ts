@@ -7,14 +7,17 @@ import { DutyService } from "src/app/services/duty.service";
   styleUrls: ["./duties-list.component.css"],
 })
 export class DutiesListComponent implements OnInit {
-  duties: Duty[] = new Array<Duty>();
-  currentDuty: Duty = new Duty("", "");
-  currentIndex = -1;
+  public duties: Duty[] = new Array<Duty>();
+  public currentDuty: Duty = new Duty("", "");
+  public currentIndex = -1;
+
   constructor(private dutyService: DutyService) {}
+
   ngOnInit(): void {
     this.retrieveDuties();
   }
-  retrieveDuties(): void {
+
+  private retrieveDuties(): void {
     this.dutyService.getAll().subscribe({
       next: (data) => {
         this.duties = data;
@@ -23,12 +26,8 @@ export class DutiesListComponent implements OnInit {
       error: (e) => console.error(e),
     });
   }
-  refreshList(): void {
-    this.retrieveDuties();
-    this.currentDuty = new Duty("", "");
-    this.currentIndex = -1;
-  }
-  setActiveDuty(duty: Duty, index: number): void {
+
+  public setActiveDuty(duty: Duty, index: number): void {
     if (this.currentDuty.Id === "") {
       this.currentDuty = duty;
       this.currentIndex = index;

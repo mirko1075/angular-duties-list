@@ -17,14 +17,13 @@ import { DutyService } from "src/app/services/duty.service";
   styleUrls: ["./add-duty.component.css"],
 })
 export class AddDutyComponent implements OnInit {
-  addDutyForm: FormGroup = new FormGroup({});
-  duty: Duty = {
+  public addDutyForm: FormGroup = new FormGroup({});
+  public duty: Duty = {
     Id: "",
     Name: "",
   };
-  submitted = false;
-  message: String | undefined;
-  dutiesIds: String[] = new Array<String>();
+  public submitted = false;
+  public dutiesIds: String[] = new Array<String>();
 
   constructor(private dutyService: DutyService) {}
 
@@ -45,7 +44,7 @@ export class AddDutyComponent implements OnInit {
     this.retrieveDuties();
   }
 
-  validateId(): ValidatorFn {
+  private validateId(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value;
 
@@ -61,7 +60,7 @@ export class AddDutyComponent implements OnInit {
     };
   }
 
-  retrieveDuties(): void {
+  private retrieveDuties(): void {
     this.dutyService.getAll().subscribe({
       next: (data) => {
         data.forEach((duty) => this.dutiesIds.push(duty.Id));
@@ -71,7 +70,7 @@ export class AddDutyComponent implements OnInit {
     });
   }
 
-  async saveDuty(): Promise<void> {
+  public async saveDuty(): Promise<void> {
     this.dutyService.create(this.addDutyForm.value).subscribe({
       next: (res) => {
         console.log(res);
@@ -81,7 +80,7 @@ export class AddDutyComponent implements OnInit {
     });
   }
 
-  newDuty(): void {
+  public newDuty(): void {
     this.submitted = false;
     this.addDutyForm = new FormGroup({
       Id: new FormControl(this.duty.Id, [
@@ -95,12 +94,5 @@ export class AddDutyComponent implements OnInit {
         Validators.maxLength(50),
       ]),
     });
-  }
-  get Id() {
-    return this.addDutyForm.get("Id");
-  }
-
-  get Name() {
-    return this.addDutyForm.get("Name");
   }
 }

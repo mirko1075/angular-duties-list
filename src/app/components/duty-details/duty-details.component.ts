@@ -21,10 +21,10 @@ export class DutyDetailsComponent implements OnInit {
     Id: "",
     Name: "",
   };
-  updateDutyForm: FormGroup = new FormGroup({});
-  message: String = "";
-  dutyId: String = "";
-  dutiesIds: Array<String> = new Array<String>();
+  public updateDutyForm: FormGroup = new FormGroup({});
+  public message: String = "";
+  public dutyId: String = "";
+  public dutiesIds: Array<String> = new Array<String>();
 
   constructor(
     private dutyService: DutyService,
@@ -44,7 +44,7 @@ export class DutyDetailsComponent implements OnInit {
       });
   }
 
-  validateId(): ValidatorFn {
+  private validateId(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value;
 
@@ -60,7 +60,7 @@ export class DutyDetailsComponent implements OnInit {
     };
   }
 
-  retrieveDuties(): void {
+  private retrieveDuties(): void {
     this.dutyService.getAll().subscribe({
       next: (data) => {
         data.forEach((duty) => this.dutiesIds.push(duty.Id));
@@ -71,7 +71,7 @@ export class DutyDetailsComponent implements OnInit {
     });
   }
 
-  async getDuty(id: String): Promise<void> {
+  public async getDuty(id: String): Promise<void> {
     await this.dutyService.get(id).subscribe({
       next: (data) => {
         this.currentDuty = data;
@@ -84,7 +84,7 @@ export class DutyDetailsComponent implements OnInit {
     });
   }
 
-  createForm(): void {
+  private createForm(): void {
     if (!this.currentDuty) return;
     this.updateDutyForm = new FormGroup({
       Id: new FormControl(this.currentDuty.Id, [
@@ -101,7 +101,7 @@ export class DutyDetailsComponent implements OnInit {
     });
   }
 
-  updateDuty(): void {
+  public updateDuty(): void {
     this.message = "";
     this.dutyService.update(this.dutyId, this.updateDutyForm.value).subscribe({
       next: (res) => {
@@ -113,7 +113,7 @@ export class DutyDetailsComponent implements OnInit {
     });
   }
 
-  deleteDuty(): void {
+  public deleteDuty(): void {
     confirm("Are you sure you want to delete this item?") &&
       this.dutyService.delete(this.currentDuty.Id).subscribe({
         next: (res) => {
@@ -122,13 +122,5 @@ export class DutyDetailsComponent implements OnInit {
         },
         error: (e) => console.error(e),
       });
-  }
-
-  get Id() {
-    return this.updateDutyForm.get("Id");
-  }
-
-  get Name() {
-    return this.updateDutyForm.get("Name");
   }
 }
