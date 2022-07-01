@@ -14,6 +14,7 @@
   </div>
   <div class="col-md-6">
     <app-duty-details
+      *ngIf="duties.length"
       [viewMode]="true"
       [currentDuty]="currentDuty"
     ></app-duty-details>

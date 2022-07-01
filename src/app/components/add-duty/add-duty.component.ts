@@ -41,10 +41,18 @@ export class AddDutyComponent implements OnInit {
   }
   newDuty(): void {
     this.submitted = false;
-    this.duty = {
-      Id: "",
-      Name: "",
-    };
+    this.addDutyForm = new FormGroup({
+      Id: new FormControl(this.duty.Id, [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(4),
+      ]),
+      Name: new FormControl(this.duty.Name, [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(50),
+      ]),
+    });
   }
   get Id() {
     return this.addDutyForm.get("Id");

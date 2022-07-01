@@ -7,7 +7,7 @@ import { DutyService } from "src/app/services/duty.service";
   styleUrls: ["./duties-list.component.css"],
 })
 export class DutiesListComponent implements OnInit {
-  duties?: Duty[];
+  duties: Duty[] = new Array<Duty>();
   currentDuty: Duty = new Duty("", "");
   currentIndex = -1;
   constructor(private dutyService: DutyService) {}

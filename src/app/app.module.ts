@@ -9,7 +9,7 @@ import { DutiesListComponent } from "./components/duties-list/duties-list.compon
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { NavbarComponent } from "./components/navbar/navbar.component";
-
+import { MaterialModule } from "./modules/material/material.module";
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +24,7 @@ import { NavbarComponent } from "./components/navbar/navbar.component";
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
