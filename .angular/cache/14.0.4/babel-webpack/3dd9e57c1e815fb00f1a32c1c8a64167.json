@@ -1,1 +1,0 @@
-{"ast":null,"code":"export class Duty {\n  constructor(Id, Name) {\n    this.Id = \"\";\n    this.Name = \"\";\n    this.Id = Id;\n    this.Name = Name;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}
