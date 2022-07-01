@@ -1,4 +1,4 @@
-# AngularDutiesListApp
+# Angular Duties List App
 
 TO run the app:
 #Install libraries
