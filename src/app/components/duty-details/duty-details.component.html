@@ -1,0 +1,65 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentDuty.Id">
+    <h4>Duty</h4>
+    <div>
+      <label><strong>Id:</strong></label> {{ currentDuty.Id }}
+    </div>
+    <div>
+      <label><strong>Name:</strong></label>
+      {{ currentDuty.Name }}
+    </div>
+
+    <a class="badge badge-warning" routerLink="/duties/{{ currentDuty.Id }}">
+      Edit
+    </a>
+  </div>
+  <div *ngIf="!currentDuty">
+    <br />
+    <p>Please click on a Duty...</p>
+  </div>
+</div>
+<ng-template #editable>
+  <div *ngIf="currentDuty.Id" class="edit-form">
+    <h4>Duty</h4>
+    <form>
+      <div class="form-group">
+        <label for="id">Id</label>
+        <input
+          type="text"
+          class="form-control"
+          id="id"
+          [(ngModel)]="currentDuty.Id"
+          name="id"
+        />
+      </div>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          [(ngModel)]="currentDuty.Name"
+          name="name"
+        />
+      </div>
+    </form>
+    <button class="badge badge-primary mr-2" (click)="updatePublished(true)">
+      Publish
+    </button>
+    <button class="badge badge-danger mr-2" (click)="deleteDuty()">
+      Delete
+    </button>
+    <button
+      type="submit"
+      class="badge badge-success mb-2"
+      (click)="updateDuty()"
+    >
+      Update
+    </button>
+    <p>{{ message }}</p>
+  </div>
+  <div *ngIf="!currentDuty.Id">
+    <br />
+    <p>Cannot access this Duty...</p>
+  </div>
+</ng-template>

@@ -1,0 +1,21 @@
+<div class="list row">
+  <div class="col-md-6">
+    <h4>Duties List</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let duty of duties; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveDuty(duty, i)"
+      >
+        {{ duty.Name }}
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <app-duty-details
+      [viewMode]="true"
+      [currentDuty]="currentDuty"
+    ></app-duty-details>
+  </div>
+</div>
