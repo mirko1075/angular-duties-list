@@ -1,5 +1,12 @@
 import { Component, createPlatform, Input, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from "@angular/forms";
 import { DutyService } from "src/app/services/duty.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Duty } from "src/app/models/duty.model";
@@ -15,7 +22,9 @@ export class DutyDetailsComponent implements OnInit {
     Name: "",
   };
   updateDutyForm: FormGroup = new FormGroup({});
-  message = "";
+  message: String = "";
+  dutyId: String = "";
+  dutiesIds: Array<String> = new Array<String>();
 
   constructor(
     private dutyService: DutyService,
@@ -25,7 +34,7 @@ export class DutyDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.message = "";
-    console.log("this.currentDuty", this.currentDuty);
+    this.retrieveDuties();
     this.getDuty(this.route.snapshot.params["id"])
       .then((result) => {
         console.log("Duty loaded");
@@ -33,14 +42,40 @@ export class DutyDetailsComponent implements OnInit {
       .catch((err: Error) => {
         console.log(err);
       });
-    console.log("this.currentDuty", this.currentDuty);
+  }
+
+  validateId(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+
+      if (!value) {
+        return null;
+      }
+
+      const isIdValid = !this.dutiesIds
+        .filter((d) => d !== this.currentDuty.Id)
+        .find((dutyId: String) => dutyId === control.value);
+
+      return !isIdValid ? { idValidErr: true } : null;
+    };
+  }
+
+  retrieveDuties(): void {
+    this.dutyService.getAll().subscribe({
+      next: (data) => {
+        data.forEach((duty) => this.dutiesIds.push(duty.Id));
+
+        console.log(data);
+      },
+      error: (e) => console.error(e),
+    });
   }
 
   async getDuty(id: String): Promise<void> {
-    this.dutyService.get(id).subscribe({
+    await this.dutyService.get(id).subscribe({
       next: (data) => {
         this.currentDuty = data;
-        console.log("data", data);
+        this.dutyId = this.currentDuty?.Id;
       },
       complete: () => {
         this.createForm();
@@ -56,6 +91,7 @@ export class DutyDetailsComponent implements OnInit {
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(4),
+        this.validateId(),
       ]),
       Name: new FormControl(this.currentDuty.Name, [
         Validators.required,
@@ -63,22 +99,18 @@ export class DutyDetailsComponent implements OnInit {
         Validators.maxLength(50),
       ]),
     });
-    console.log("this.updateDutyForm", this.updateDutyForm);
   }
 
   updateDuty(): void {
     this.message = "";
-    this.dutyService
-      .update(this.currentDuty.Id, this.updateDutyForm.value)
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this.message = res.message
-            ? res.message
-            : "This Duty was updated successfully!";
-        },
-        error: (e) => console.error(e),
-      });
+    this.dutyService.update(this.dutyId, this.updateDutyForm.value).subscribe({
+      next: (res) => {
+        this.message = res.message
+          ? res.message
+          : "This Duty was updated successfully!";
+      },
+      error: (e) => console.error(e),
+    });
   }
 
   deleteDuty(): void {
@@ -90,5 +122,13 @@ export class DutyDetailsComponent implements OnInit {
         },
         error: (e) => console.error(e),
       });
+  }
+
+  get Id() {
+    return this.updateDutyForm.get("Id");
+  }
+
+  get Name() {
+    return this.updateDutyForm.get("Name");
   }
 }

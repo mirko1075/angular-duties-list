@@ -12,15 +12,23 @@
           formControlName="Id"
         />
         <div
-          *ngIf="Id?.invalid && (Id?.dirty || Id?.touched)"
+          *ngIf="
+            addDutyForm.get('Id')?.invalid &&
+            (addDutyForm.get('Id')?.dirty || addDutyForm.get('Id')?.touched)
+          "
           class="alert alert-danger"
         >
-          <div *ngIf="Id?.errors?.['required']">Id is required.</div>
-          <div *ngIf="Id?.errors?.['minlength']">
+          <div *ngIf="addDutyForm.get('Id')?.errors?.['required']">
+            Id is required.
+          </div>
+          <div *ngIf="addDutyForm.get('Id')?.errors?.['minlength']">
             Id must be at least 2 characters long.
           </div>
-          <div *ngIf="Id?.errors?.['maxlength']">
+          <div *ngIf="addDutyForm.get('Id')?.errors?.['maxlength']">
             Id must be not more than 4 characters long.
+          </div>
+          <div *ngIf="addDutyForm.get('Id')?.errors?.['idValidErr']">
+            Id is already taken
           </div>
         </div>
         <div class="form-group">
@@ -33,14 +41,20 @@
             formControlName="Name"
           />
           <div
-            *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)"
+            *ngIf="
+              addDutyForm.get('Name')?.invalid &&
+              (addDutyForm.get('Name')?.dirty ||
+                addDutyForm.get('Name')?.touched)
+            "
             class="alert alert-danger"
           >
-            <div *ngIf="Name?.errors?.['required']">Name is required.</div>
-            <div *ngIf="Name?.errors?.['minlength']">
+            <div *ngIf="addDutyForm.get('Name')?.errors?.['required']">
+              Name is required.
+            </div>
+            <div *ngIf="addDutyForm.get('Name')?.errors?.['minlength']">
               Id must be at least 8 characters long.
             </div>
-            <div *ngIf="Name?.errors?.['maxlength']">
+            <div *ngIf="addDutyForm.get('Name')?.errors?.['maxlength']">
               Name must be not more than 50 characters long.
             </div>
           </div>

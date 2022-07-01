@@ -8,25 +8,24 @@ const baseUrl = "http://localhost:3000/api/duties";
 })
 export class DutyService {
   constructor(private http: HttpClient) {}
+
   getAll(): Observable<Duty[]> {
     return this.http.get<Duty[]>(baseUrl);
   }
-  get(id: any): Observable<Duty> {
+
+  get(id: String): Observable<Duty> {
     return this.http.get<Duty>(`${baseUrl}/${id}`);
   }
-  create(data: any): Observable<any> {
+
+  create(data: { Id: String; Name: String }): Observable<any> {
     return this.http.post(baseUrl, data);
   }
-  update(id: any, data: any): Observable<any> {
+
+  update(id: String, data: { Id: String; Name: String }): Observable<any> {
     return this.http.put(`${baseUrl}/${id}`, data);
   }
-  delete(id: any): Observable<any> {
+
+  delete(id: String): Observable<any> {
     return this.http.delete(`${baseUrl}/${id}`);
-  }
-  deleteAll(): Observable<any> {
-    return this.http.delete(baseUrl);
-  }
-  findByTitle(title: any): Observable<Duty[]> {
-    return this.http.get<Duty[]>(`${baseUrl}?title=${title}`);
   }
 }

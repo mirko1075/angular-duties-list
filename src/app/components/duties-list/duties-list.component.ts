@@ -29,7 +29,12 @@ export class DutiesListComponent implements OnInit {
     this.currentIndex = -1;
   }
   setActiveDuty(duty: Duty, index: number): void {
-    this.currentDuty = duty;
-    this.currentIndex = index;
+    if (this.currentDuty.Id === "") {
+      this.currentDuty = duty;
+      this.currentIndex = index;
+    } else {
+      this.currentDuty = new Duty("", "");
+      this.currentIndex = -1;
+    }
   }
 }
