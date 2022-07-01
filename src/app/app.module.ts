@@ -7,7 +7,7 @@ import { AddDutyComponent } from "./components/add-duty/add-duty.component";
 import { DutyDetailsComponent } from "./components/duty-details/duty-details.component";
 import { DutiesListComponent } from "./components/duties-list/duties-list.component";
 import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { NavbarComponent } from "./components/navbar/navbar.component";
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [HttpClient],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

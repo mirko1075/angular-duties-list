@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Duty } from "../models/duty.model";
 const baseUrl = "http://localhost:3000/api/duties";

@@ -1,23 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { DutiesListComponent } from "./duties-list.component";
 
-import { DutiesListComponent } from './duties-list.component';
-
-describe('DutiesListComponent', () => {
+describe("DutiesListComponent", () => {
   let component: DutiesListComponent;
   let fixture: ComponentFixture<DutiesListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DutiesListComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientTestingModule],
+      declarations: [DutiesListComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DutiesListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

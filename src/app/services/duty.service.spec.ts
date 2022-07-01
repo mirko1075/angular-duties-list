@@ -1,16 +1,19 @@
-import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { TestBed } from "@angular/core/testing";
 
-import { DutyService } from './duty.service';
+import { DutyService } from "./duty.service";
 
-describe('DutyService', () => {
+describe("DutyService", () => {
   let service: DutyService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+    });
     service = TestBed.inject(DutyService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 });

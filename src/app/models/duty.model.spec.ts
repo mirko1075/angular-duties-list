@@ -1,7 +1,7 @@
-import { Duty } from './duty.model';
+import { Duty } from "./duty.model";
 
-describe('Duty', () => {
-  it('should create an instance', () => {
-    expect(new Duty()).toBeTruthy();
+describe("Duty", () => {
+  it("should create an instance", () => {
+    expect(new Duty("", "")).toBeTruthy();
   });
 });
