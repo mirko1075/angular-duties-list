@@ -23,7 +23,9 @@ export class DutyDetailsComponent implements OnInit {
   ngOnInit(): void {
     if (!this.viewMode) {
       this.message = "";
+      console.log("this.currentDuty", this.currentDuty);
       this.getDuty(this.route.snapshot.params["id"]);
+      console.log("this.currentDuty", this.currentDuty);
     }
   }
   getDuty(id: string): void {

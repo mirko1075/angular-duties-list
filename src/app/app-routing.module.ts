@@ -6,8 +6,8 @@ import { DutyDetailsComponent } from "./components/duty-details/duty-details.com
 const routes: Routes = [
   { path: "", redirectTo: "duties", pathMatch: "full" },
   { path: "duties", component: DutiesListComponent },
-  { path: "duties/:id", component: AddDutyComponent },
-  { path: "add", component: DutyDetailsComponent },
+  { path: "duties/:id", component: DutyDetailsComponent },
+  { path: "add", component: AddDutyComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
