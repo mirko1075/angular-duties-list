@@ -9,7 +9,7 @@
       {{ currentDuty.Name }}
     </div>
 
-    <a class="badge badge-warning" routerLink="/duties/{{ currentDuty.Id }}">
+    <a class="btn btn-warning" routerLink="/duties/{{ currentDuty.Id }}">
       Edit
     </a>
   </div>
@@ -76,15 +76,8 @@
           </div>
         </div>
       </div>
-      <button mat-button>Basic</button>
-      <button class="badge badge-danger mr-2" (click)="deleteDuty()">
-        Delete
-      </button>
-      <button
-        type="submit"
-        class="badge badge-success mb-2"
-        (click)="updateDuty()"
-      >
+      <button class="btn btn-danger mr-5" (click)="deleteDuty()">Delete</button>
+      <button type="submit" class="btn btn-success" (click)="updateDuty()">
         Update
       </button>
       <p>{{ message }}</p>
