@@ -6,6 +6,7 @@ import { TestBed } from "@angular/core/testing";
 
 import { DutyService } from "./duty.service";
 import { mockDutyArray, mockDuty } from "../../mocks/mockDuties";
+import { Duty } from "../models/duty.model";
 
 describe("DutyService", () => {
   let service: DutyService;
@@ -57,5 +58,43 @@ describe("DutyService", () => {
     });
 
     req.flush(mockDuty);
+  });
+
+  it("should call update Duty and return the updated Duty from the API", () => {
+    const id = "zzzz";
+    const updatedDuty: Duty = {
+      Id: "zzzz",
+      Name: "zzzz",
+    };
+
+    service.update(id, mockDuty).subscribe((data) => {
+      expect(data).toEqual(updatedDuty);
+    });
+
+    const req = httpController.expectOne({
+      method: "PUT",
+      url: `${url}/duties/${id}`,
+    });
+
+    req.flush(updatedDuty);
+  });
+
+  it("should call delete Duty and return the deleted Duty from the API", () => {
+    const id = "zzzz";
+    const deletedDuty: Duty = {
+      Id: "zzzz",
+      Name: "zzzz",
+    };
+
+    service.delete(id).subscribe((data) => {
+      expect(data).toEqual(deletedDuty);
+    });
+
+    const req = httpController.expectOne({
+      method: "DELETE",
+      url: `${url}/duties/${id}`,
+    });
+
+    req.flush(deletedDuty);
   });
 });
