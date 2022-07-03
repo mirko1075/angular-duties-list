@@ -24,7 +24,7 @@ export class AddDutyComponent implements OnInit {
   };
   public submitted = false;
   public dutiesIds: String[] = new Array<String>();
-
+  public error: Error | undefined;
   constructor(private dutyService: DutyService) {}
 
   ngOnInit(): void {
@@ -66,7 +66,9 @@ export class AddDutyComponent implements OnInit {
         data.forEach((duty) => this.dutiesIds.push(duty.Id));
         console.log(data);
       },
-      error: (e) => console.error(e),
+      error: (e) => {
+        console.error(e);
+      },
     });
   }
 
@@ -76,7 +78,11 @@ export class AddDutyComponent implements OnInit {
         console.log(res);
         this.submitted = true;
       },
-      error: (e) => console.error(e),
+      error: (e) => {
+        this.submitted = false;
+        this.error = e;
+        console.error(e);
+      },
     });
   }
 

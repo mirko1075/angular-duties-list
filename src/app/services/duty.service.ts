@@ -47,8 +47,7 @@ export class DutyService {
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`);
-
-      return of(result as T);
+      throw new Error(error);
     };
   }
 }

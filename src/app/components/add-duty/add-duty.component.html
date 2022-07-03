@@ -1,5 +1,6 @@
 <div [formGroup]="addDutyForm">
   <div class="submit-form">
+    <h4>Add New Duty</h4>
     <div *ngIf="!submitted">
       <div class="form-group">
         <label for="Id">Id</label>
@@ -71,6 +72,9 @@
     <div *ngIf="submitted">
       <h4>Duty was submitted successfully!</h4>
       <button class="btn btn-success" (click)="newDuty()">Add</button>
+    </div>
+    <div *ngIf="error" class="badge badge-danger">
+      <h4>Duty was not submitted successfully!</h4>
     </div>
   </div>
 </div>
