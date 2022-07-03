@@ -87,7 +87,13 @@
       >
         Update
       </button>
-      <p>{{ message }}</p>
+      <br />
+      <p
+        *ngIf="message.length"
+        class="badge {{ error ? 'badge-danger' : 'badge-success' }}"
+      >
+        {{ message }}
+      </p>
     </div>
   </div>
   <div *ngIf="!currentDuty.Id">

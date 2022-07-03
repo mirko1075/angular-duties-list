@@ -25,6 +25,7 @@ export class DutyDetailsComponent implements OnInit {
   public message: String = "";
   public dutyId: String = "";
   public dutiesIds: Array<String> = new Array<String>();
+  public error: Error | undefined;
 
   constructor(
     private dutyService: DutyService,
@@ -109,7 +110,11 @@ export class DutyDetailsComponent implements OnInit {
           ? res.message
           : "This Duty was updated successfully!";
       },
-      error: (e) => console.error(e),
+      error: (e) => {
+        this.message = "Duty was not updated successfully";
+        this.error = e;
+        console.error(e);
+      },
     });
   }
 
@@ -120,7 +125,12 @@ export class DutyDetailsComponent implements OnInit {
           console.log(res);
           this.router.navigate(["/duties"]);
         },
-        error: (e) => console.error(e),
+        error: (e) => {
+          this.message = "Duty was not deleted successfully";
+          this.error = e;
+
+          console.error(e);
+        },
       });
   }
 }
