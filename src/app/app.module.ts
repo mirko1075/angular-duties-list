@@ -9,6 +9,7 @@ import { DutiesListComponent } from "./components/duties-list/duties-list.compon
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { NavbarComponent } from "./components/navbar/navbar.component";
+import { OfflineDirective } from './directives/offline.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,6 +17,7 @@ import { NavbarComponent } from "./components/navbar/navbar.component";
     DutyDetailsComponent,
     DutiesListComponent,
     NavbarComponent,
+    OfflineDirective,
   ],
   imports: [
     BrowserModule,
